@@ -1,0 +1,155 @@
+{
+  "source": "AFRICACDC enhanced through research",
+  "diseases": [
+    {
+      "disease": "Anthrax",
+      "description": "Anthrax is a serious infectious disease caused by Bacillus anthracis bacteria found in soil and affecting animals and humans.",
+      "symptoms": ["fever", "fatigue", "chest discomfort", "shortness of breath"],
+      "recommended_exams": ["blood culture", "PCR test", "chest X-ray"]
+    },
+    {
+      "disease": "Avian Influenza",
+      "description": "Avian influenza is caused by bird influenza Type A viruses, including H5, H7, and H9 strains that can infect humans.",
+      "symptoms": ["fever", "cough", "sore throat", "muscle aches"],
+      "recommended_exams": ["PCR test", "nasal/throat swab", "chest imaging"]
+    },
+    {
+      "disease": "Chikungunya",
+      "description": "Chikungunya is a mosquito-borne viral disease characterized by fever and severe joint pain.",
+      "symptoms": ["fever", "joint pain", "headache", "rash", "fatigue"],
+      "recommended_exams": ["PCR test", "serology (IgM/IgG)", "complete blood count"]
+    },
+    {
+      "disease": "Cholera",
+      "description": "Cholera is an acute diarrheal infection caused by contaminated food or water and can be fatal if untreated.",
+      "symptoms": ["severe diarrhea", "dehydration", "vomiting", "leg cramps"],
+      "recommended_exams": ["stool culture", "rapid diagnostic test", "electrolyte panel"]
+    },
+    {
+      "disease": "COVID-19",
+      "description": "COVID-19 is a respiratory disease caused by a novel coronavirus that spreads between humans.",
+      "symptoms": ["fever", "cough", "fatigue", "loss of taste or smell"],
+      "recommended_exams": ["PCR test", "rapid antigen test", "chest CT scan"]
+    },
+    {
+      "disease": "Crimean-Congo Haemorrhagic Fever",
+      "description": "CCHF is a severe viral hemorrhagic fever transmitted by ticks and infected animals.",
+      "symptoms": ["fever", "muscle pain", "dizziness", "bleeding"],
+      "recommended_exams": ["PCR test", "ELISA", "complete blood count"]
+    },
+    {
+      "disease": "Dengue",
+      "description": "Dengue is a mosquito-borne viral infection that can develop into severe dengue.",
+      "symptoms": ["fever", "headache", "eye pain", "joint pain", "rash"],
+      "recommended_exams": ["NS1 antigen test", "PCR test", "platelet count"]
+    },
+    {
+      "disease": "Ebola",
+      "description": "Ebola is a severe viral disease transmitted through direct contact with infected body fluids.",
+      "symptoms": ["fever", "vomiting", "diarrhea", "bleeding"],
+      "recommended_exams": ["PCR test", "ELISA", "blood tests"]
+    },
+    {
+      "disease": "Hepatitis B",
+      "description": "Hepatitis B is a serious liver infection caused by the hepatitis B virus.",
+      "symptoms": ["fatigue", "jaundice", "abdominal pain", "dark urine"],
+      "recommended_exams": ["HBsAg test", "liver function tests", "PCR test"]
+    },
+    {
+      "disease": "Hepatitis C",
+      "description": "Hepatitis C is a liver disease caused by the hepatitis C virus that can become chronic.",
+      "symptoms": ["fatigue", "jaundice", "nausea", "loss of appetite"],
+      "recommended_exams": ["HCV antibody test", "PCR test", "liver function tests"]
+    },
+    {
+      "disease": "Hepatitis E",
+      "description": "Hepatitis E is a liver infection caused by HEV, common in areas with poor sanitation.",
+      "symptoms": ["fatigue", "jaundice", "fever", "nausea"],
+      "recommended_exams": ["HEV antibody test", "PCR test", "liver function tests"]
+    },
+    {
+      "disease": "HIV",
+      "description": "HIV attacks the immune system and can lead to AIDS if untreated.",
+      "symptoms": ["fever", "weight loss", "night sweats", "fatigue"],
+      "recommended_exams": ["HIV antibody test", "viral load test", "CD4 count"]
+    },
+    {
+      "disease": "Lassa Fever",
+      "description": "Lassa Fever is a viral hemorrhagic illness endemic in West Africa.",
+      "symptoms": ["fever", "weakness", "headache", "bleeding"],
+      "recommended_exams": ["PCR test", "ELISA", "blood tests"]
+    },
+    {
+      "disease": "Malaria",
+      "description": "Malaria is a mosquito-borne disease that can be life-threatening but is preventable and treatable.",
+      "symptoms": ["fever", "chills", "sweating", "headache"],
+      "recommended_exams": ["blood smear", "rapid diagnostic test (RDT)", "complete blood count"]
+    },
+    {
+      "disease": "Marburg Virus Disease",
+      "description": "Marburg virus disease is a severe hemorrhagic fever transmitted from bats and between humans.",
+      "symptoms": ["fever", "headache", "muscle pain", "bleeding"],
+      "recommended_exams": ["PCR test", "ELISA", "blood tests"]
+    },
+    {
+      "disease": "Measles",
+      "description": "Measles is a highly contagious viral disease preventable by vaccination.",
+      "symptoms": ["fever", "rash", "cough", "runny nose"],
+      "recommended_exams": ["serology (IgM)", "PCR test"]
+    },
+    {
+      "disease": "Meningococcal Meningitis",
+      "description": "This is a bacterial infection affecting the brain and spinal cord lining.",
+      "symptoms": ["fever", "stiff neck", "headache", "sensitivity to light"],
+      "recommended_exams": ["lumbar puncture", "blood culture", "PCR test"]
+    },
+    {
+      "disease": "MERS",
+      "description": "Middle East Respiratory Syndrome is a viral respiratory illness caused by a coronavirus.",
+      "symptoms": ["fever", "cough", "shortness of breath"],
+      "recommended_exams": ["PCR test", "chest X-ray", "blood tests"]
+    },
+    {
+      "disease": "Monkeypox",
+      "description": "Monkeypox is a viral zoonotic disease transmitted through close contact.",
+      "symptoms": ["fever", "rash", "swollen lymph nodes", "fatigue"],
+      "recommended_exams": ["PCR test", "lesion swab", "blood tests"]
+    },
+    {
+      "disease": "Plague",
+      "description": "Plague is caused by Yersinia pestis and can occur in bubonic or pneumonic forms.",
+      "symptoms": ["fever", "swollen lymph nodes", "chills", "weakness"],
+      "recommended_exams": ["blood culture", "lymph node aspirate", "PCR test"]
+    },
+    {
+      "disease": "Polio",
+      "description": "Polio is a highly infectious viral disease that can cause paralysis.",
+      "symptoms": ["fever", "fatigue", "headache", "muscle weakness"],
+      "recommended_exams": ["stool sample test", "PCR test", "CSF analysis"]
+    },
+    {
+      "disease": "Rift Valley Fever",
+      "description": "Rift Valley Fever spreads through contact with infected animals or mosquitoes.",
+      "symptoms": ["fever", "weakness", "back pain", "dizziness"],
+      "recommended_exams": ["PCR test", "ELISA", "blood tests"]
+    },
+    {
+      "disease": "Tuberculosis",
+      "description": "Tuberculosis is a bacterial infection that mainly affects the lungs.",
+      "symptoms": ["persistent cough", "weight loss", "night sweats", "fever"],
+      "recommended_exams": ["sputum test", "chest X-ray", "GeneXpert test"]
+    },
+    {
+      "disease": "Yellow Fever",
+      "description": "Yellow Fever is a viral hemorrhagic disease transmitted by mosquitoes.",
+      "symptoms": ["fever", "jaundice", "muscle pain", "headache"],
+      "recommended_exams": ["PCR test", "ELISA", "liver function tests"]
+    },
+    {
+      "disease": "Zika Virus",
+      "description": "Zika virus is transmitted by mosquitoes and may cause neurological complications.",
+      "symptoms": ["fever", "rash", "joint pain", "red eyes"],
+      "recommended_exams": ["PCR test", "serology test"]
+    }
+  ]
+}

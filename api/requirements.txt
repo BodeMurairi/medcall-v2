@@ -1,0 +1,29 @@
+africastalking 
+psycopg2-binary
+fastapi[standard]
+uvicorn[standard]
+sqlalchemy
+pydantic[standard]
+alembic
+python-dotenv
+httpx
+pytest
+databases[postgresql]
+pytest-asyncio
+langchain[google-genai]
+langchain-google-vertexai
+langchain-google-genai
+langchain-openai
+openai
+google-genai
+# Latest LangGraph (pre-release included if available)
+--pre langgraph
+colorama
+requests
+bcrypt
+python-jose[cryptography]
+phonenumbers
+tavily-python>=0.7.13
+tavily>=1.1.0
+Pillow
+pandas

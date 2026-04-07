@@ -1,0 +1,307 @@
+S/No.,PPO Name,Physical Adress,Services Provided
+DAR ES SALAAM,,,
+1,The Aga Khan Hospital,Along Obama Road,OP/IP
+2,Sali International Hospital,Masaki,OP/IP
+3,Premier Care Clinic,Masaki,OP
+4,Premier Care Clinic,Namanga,OP
+5,London Health Centre,Msasani,OP/IP
+6,International Eye Hospital,Along New Bagamoyo Road,Optical/Opthalmolgy
+7,Aga Khan Medical Centre-Mbezi Beach,Mbezi beach,OP
+8,Aga Khan Medical Centre-City Centre,City Centre,OP
+9,Aga Khan Medical Centre-Tabata,Tabata,OP
+10,Aga Khan Medical Centre-Masaki,Masaki,OP
+11,Aga Khan Medical Centre-Ukonga,Ukonga,OP
+12,Aga Khan Medical Centre-Mbagala,Mbagala,OP
+13,Aga Khan Medical Centre-Mikocheni,Mikocheni,OP
+14,Aga Khan Medical Centre-Tandika,Tandika,OP
+15,Aga Khan Medical Centre-Kigamboni,Kigamboni,OP
+16,Aga Khan Medical Centre-Kimara,Kimara Mwisho,OP
+17,Aga Khan Medical Clinic-Bunju,Bunju A,OP
+18,TMJ Hospital,Mikocheni,OP/IP
+19,Tanzania Occupational Health Services,Tazara,OP/IP
+20,Ebrahim Haji Hospital,City Centre,OP/IP
+21,Msasani Peninsula Hospital,Msasani,OP/IP
+22,CCBRT,Msasani,OP/IP
+23,Regency Medical Centre,Upanga,OP/IP
+24,Kairuki Hospital (Mikocheni Mission Hospital),Mikocheni,OP/IP
+25,Alshifa Limited,Mikocheni,OP
+26,Sandarya Health Centre,Bunju A,OP/IP
+27,Mount Ukombozi Hospital,Kinondoni-Morocco,OP/IP
+28,ALEXIA MEDICAL HOSPITAL,Kigamboni-Tuangoma,OP/IP
+29,Navan Health Center,Kigamboni-Kibada,OP
+30,Bochi Hospital,Mbezi-Kwa Msuguri,OP/IP
+31,Marie Stopes Mwenge Hospital,Mwenge,OP/IP
+32,Marie Stopes Kimara Dispensary,Kimara-Butcher,OP
+33,Marie Stopes Mabibo Dispensary,Mabibo-Bus stand,OP
+34,Marie Stopes Temeke Dispensary,Temeke-Sokota,OP
+35,Eye Emporium Limited,City Centre,Optical
+36,Eye Emporium Limited,Quality Centre,Optical
+37,Eye Emporium Limited,Masaki,Optical
+38,Eye Emporium Limited,Mlimani City,Optical
+39,Msimbazi Eye & Vision Care Ltd,msimbazi,OP
+40,Doctors Plaza Polyclinic(Conservation house 2nd floor),Kinondoni Morocco,OP
+41,Lancet Laboratories(Conservation house 2nd floor),Kinondoni Morocco,OP
+42,B&B Specialized Clinic,Goba Chaulembo,OP
+43,Tindwa Medical and Health services Limited,Mikocheni,Rescue
+44,Radtech Diagnostic and Medical Clinic,Ilala Bungoni,OP
+45,Jakaya Kikwete Cardiac Institute,Upanga,OP/IP
+46,Besta Diagnostic Centre,Kinondoni,Diagnostic Services
+47,Arafa Upendo Medical Centre,Temeke,OP/IP
+48,Ekenywa Specialized Hospital,Magomeni Mwembechai,OP/IP/Dental
+49,Muhumuliza Healthcare Polyclinic,Kinyerezi,OP
+50,Muhimbili National Hospital(MNH),Upanga,OP/IP/Dental/Optical
+51,Muhimbili Orthopaedic Institute(MOI),Upanga,OP/IP
+52,Dr Hameer Health Centre,"Kariakoo,Fire area",OP/IP
+53,Empire Dental Clinic,Oysterbay,Dental
+,,,
+54,Oasis Healthcare Clinic,Ubungo Riverside Area,OP
+55,CCP Medicine Medical Centre,Kinyerezi,OP
+56,Kitengule Hospital,Tegeta Kibaoni,OP/IP
+57,Medwin Family Healthcare olyclinic,Mbezi-Africana,OP
+58,Epiphany Dispensary,Mtoni Kijichi,OP/IP
+59,Cardinal Rugambwa Hospital,Ukonga,OP/IP
+60,Hitech Sai Hospital,Upanga,OP/IP
+61,Kitonka Hospital,Gongo la Mboto,OP/IP
+62,Hans Mugaya Medicare,Bunju B,OP/IP
+63,Best Choice Eye Centre,"Mikocheni, Palm Village",Optical
+64,Miracolo Hospital,Tabata,OP/IP
+65,Family Eye Care,Siza Palestina,Optical
+66,Oasis Healthcare Clinic,"Mabibo, Mwongozo ST.",OP & Observation
+67,TMJ Specialized Polyclinic,Chang'ombe,OP
+68,Burhani Charitable Hospital,Dar es Salaam,OP/IP/Dental/Optical
+69,TIBA Health Centre,Upanga,OP
+70,NELA Super Specialized Polyclinic,Temeke,Op
+71,Saifee Hospital Tanzania,Buyuni-Kinondoni Dar es Salaam,OP/IP/Dental/Optical
+72,Sanitas Hospital,Mikocheni Kwa warioba,OP/IP
+73,Smile Dental-Posta Branch,Posta,Dental
+74,Smile Dental-Jamuhuri Branch,Jamuhuri,Dental
+75,Resa Polyclinic,Kunduchi,OP
+76,Rani Dental Clinic,Kawe,Dental
+77,Madonna Hospital,Tabata,OP/IP
+78,Mulokozi Polyclinic,"Kunguru, Mbezi Beach",OP
+79,Fiddy Specialized Polyclinic,Kunduchi,Op
+80,Furaha Hospital,Bunju,OP/IP/Dental/Optical
+81,Unicare Specialized Polycinic,WazoHill,OP/IP
+82,Dr Shaffiq's Specialized Polyclinic,Posta,OP
+83,Husain Specialized Polyclinic,Msasani/Namanga,OP
+84,Nena Polyclinic,Victoria,OP
+85,Shree Hindu Mandal Hospital - Main,Posta Dar Es Salaam,OP/IP/Dental/Optical
+86,Shree Hindu Mandal Kunduchi Polyclinic,Kunduchi,Op & Dialysis Centre
+87,Tamar Medical Centre,Magomeni Mwembechai,OP & Observation
+88,TMHS Polyclinic Mikocheni,Mikocheni Dar es Salaam,OP
+89,Integral Medicine Clinic,Masaki,OP
+90,Qualitas Healthcare,Kigamboni,OP/IP
+91,St. Benedict Health Centre,Kitunda,OP/IP
+92,Upanga Eye Centre (T) Ltd,"Kalenga, 594 Str Upanga- DSM",Optical only
+93,Kairuki Polyclinic,Magufuli Bus Terminal Mbezi - DSM,OP & Observation
+94,Husain Specialized Polyclinic- Basic Dental Clinic Upanga,Upanga,Dental
+95,Mauto Medical Centre,Mivumoni,OP/IP
+96,Nyumbani Specialized Polyclinic,"Kimara, Mavurunza",OP
+97,Rabininsia Memorial Hospital- MICO,Tegeta Kibaoni,OP/IP/Optical/Dental
+98,SEMWI SPECIALIZED POLYCLINIC,Tegeta Wazo Hill,OP & Observation
+99,DR. OLE LENGINE'S MEMORIAL HOSPITAL LTD,Gogoni- Kibamba- Kiluvya,OP/IP/Optical/Dental
+100,PIO Specialized Polyclinic,"Pugu Rd, Mzambarauni -Gongolamboto",OP & Observation
+101,Reenbook Polyclinic & Diagnostic Lab,"Regent Estate, Mikocheni",OP & Observation
+102,Massana Hospital,"Mbezi Beach, Goba Rd",OP/IP/Optical/Dental
+103,Alexia Polyclinic,Kigamboni Ferry,OP & Observation
+104,King's Medical Health Centre,Kariako-DSM,OP/IP/Optical/Dental
+105,ELCT-ECD Luther Polyclinic,Kimara Korogwe- DSM,OP/Dental/Observation
+106,Vision Care Goba Branch,Goba Rd,Optical only
+107,Vision Care Survey Branch,Survey - Ardhi University Rd,Optical only
+108,DSM IST Clinic,"Ruvu Rd, Masaki",OP & Observation
+109,Spartial Health Specialized Polyclinic,Mlimani Tower Mlimani City,OP & Observation
+110,Aghankiko Medical Ltd,Kinondoni Rd- Opp BAKWATA,OP & Observation
+111,Smart Specialized Dental Clinic,Victoria - New Bagamoyo Rd,Dental
+112,Sight Plus Kodak Eyewear,Old KFC- Mikocheni - DSM,Optical only
+113,Nakiete Pharmacy,"Mwenge, New Bagamoyo Rd",Pharmacy
+114,Nakiete Pharmacy,"Mikocheni, Old Bagamoyo Rd",Pharmacy
+115,Sabra Helathcare Limited,"Azania Plaza, Opp GSM Mall",OP & Observation
+116,Morella Polyclinic,"Tabata, DSM",OP & Observation
+,,,
+117,Ufunuo Polyclinic,Kivule - Ilala District DSM,OP & Observation
+118,Maknesh Temboni Dispensary,Kimara-Temboni DSM,OP & Observation
+119,Esnan Dental Turkish Clinic,Mikocheni 'B' - DSM,Dental
+120,Ndovu Specialized Dental Clinic,Sinza - DSM,Dental
+121,Miracolo Specialized Clinic,Tabata,OP
+122,Peking Healthcare Dispensary,Tabata- Bonyokwa,OP
+123,Meprow Medical Dispensary,Boko- Chama,OP
+124,Rosand Medical Clinic,Kiluvya- Gogoni- Hondogo,OP
+125,Sunsight Optical Centre,Sinza,Optical Only
+126,Cawabe Dental Clinic,Mikocheni 'B' Msikitini Rd,Dental Only
+127,Zango Medical Centre,Mbaga Chamazi - Magengeni,IP & OP
+128,MUHUMULIZA Health Care Polyclinic,Tabata-Kibaga - Kinyerezi,OP
+129,Edward Michaud Memorial Hospital,Mwenge - Nearby Mlimanicity Roundabout,IP & OP
+130,SALBA Medical Care,Mbezi Loius - Chini Along Tabata Rd,OP
+131,ST. Benedict Hospital Luguruni,Luguruni - Opposite ST. Joseph University,IP & OP
+,,,
+,,,
+,,,
+,,,
+BAGAMOYO,,,
+1,Lukha Dispensary,Bagamoyo - Along Baobao School,OP
+,,,
+,,,
+,,,
+ARUSHA,,,
+1,St.Thomas Hospital,,OP/IP
+2,Total Care Hospital,,OP/IP
+3,Arusha Lutheran Medical Centre,,OP/IP
+4,Marie Stopes Arusha Dispensary,Opposite Arusha Meru Sec. School,OP
+5,Smart Dental Clinic,,Dental
+6,Arusha SDA Medical Centre,,OP/IP
+7,Aga Khan Arusha Health Centre,Seth Benjamini Street,OP
+,,,
+8,Smart Polyclinic Arusha,"Plot no 18/2,block 1 mahakama street",OP/IP
+9,AICC Hospital,Arusha Town,OP/IP
+10,ST. JOSEPH HEALTHCARE INTERNATIONAL HOSPITAL,"PLOT 2, SAKINA ARUSHA",OP/IP
+11,Optical Solutions Ltd,Arusha Town,Optical
+12,Selian Lutheran Hospital,Arusha Town,OP/IP/Dental/Optical
+13,Mediclinic Tanzania Limited,Philips-Simeon Road- Arusha,OP/Dental/Observation
+14,Delight Dental Clinic,"PPF Road-Relini, Njiro - Arusha",Dental
+15,NSK Hospital,Arusha Town,OP/IP
+16,Vision Care Arusha Branch,Arusha Town,Optical only
+KILIMANJARO,,,
+1,Moshi Specialist Health Centre,Boma Ng'ombe,OP/IP
+2,Majengo Upendo Hospital,"Majengo, Rose Garden Road",OP/IP
+3,Shanty Town Dispensary,Moshi town,OP
+4,A2Z Polyclinic,Moshi town,OP
+5,Kilimanjaro Christian Medical Centre -KCMC,Moshi town,OP/IP
+6,Jaffery Charitable Medical Services,Moshi town,OP
+MWANZA,,,
+1,Marie Stopes Mwanza Dispensary,Nyegezi,OP
+2,Mwanza Women Hospital,Rufiji Street,OP/IP
+3,Aga Khan Medical Centre,Jamatkhana,Op/IP
+4,Bugando Medical Centre,Mwanza,OP/IP
+5,Rainbow Polyclinic,Mwanza,OP/IP
+6,Family Eye Care,Rock City Mall,Optical
+7,Shree Hindu Mandal Mwanza Hospital,Mwanza,OP/IP/Denta/Optical
+8,St. Clare Hospital,Nyegezi,OP/IP
+9,TMHS Polyclinic Mwanza,Mwanza,OP
+10,Grambah Health Centre,Ilemela,OP/IP
+11,Isamilo Specialized Polyclinic,Nyamagana,OP
+12,Dr Chacha Memorial Hospital,Mwanza Town,OP/IP
+,,,
+13,Sight Plus Kodak Eyewear,Mipa Hotel Nyerere Rd - Mwanza,Optical only
+14,ST. J. Bakhita Healthcare,"Wurzuburg Road, Bugarika, Mahina Ward",OP/IP
+,,,
+MAGU,,,
+1,Joseph Medicare Dispensary,Magu,OP
+2,Tukuyu Dispensary,Magu,OP
+MBEYA,,,
+1,Marie Stopes Mbeya Dispensary,Mama John Street,OP
+2,Aga khan Medical Centre,Mbeya town,OP
+3,Mbeya Surgical Clinic,Mbeya town,OP
+4,K's Hospital,Mbeya town,IP/OP
+5,Maranatha Hospital,Mwanjelwa,IP/OP
+6,UWATA Hospital,Bombambili-Mwakibete,IP/OP
+7,Mbeya Optical Center,Mbeya town,Optical
+8,Mbeya Zonal Referal Hospital,Mbeya town,IP/OP
+9,META Hospital Mbeya,Mbeya town,Maternity
+10,Dova Eye Care Mbeya Branch,"Ilomba, Mbeya Plot 1028",Optical only
+IRINGA,,,
+1,Marie Stopes Iringa Dispensary,Mwangata Street,OP
+2,Aga Khan Medical Centre,Iringa town,OP/IP
+3,IMECC Hospital,Iringa town,OP/IP
+4,Smart Polyclinic,Gangilonga,OP/IP
+,,,
+MAFINGA,,,
+1,Tumaini Jipya Health Centre,Mafinga town,OP/IP
+ZANZIBAR,,,
+1,Marie Stopes Zanzibar Dispensary,Migombani Unguja,OP
+2,Tasakhtaa(Global) Hospital,Ngome Kongwe Unguja,OP/IP
+3,Alrahma Hospital,Kilimani Unguja,OP/IP
+4,Dira Dispensary,Chake chake Pemba,OP
+5,Citizen Medical Clinic,Wete Pemba,OP
+6,Karibu Eye Centre,Stone town Unguja,Optical
+7,Utapoa Dispensary,Amani Unguja,OP
+8,Hankil Medical Centre,Michenzani Unguja,OP
+9,Magogoni Dispensary,Magogoni Ungunja,OP
+10,SDA Health Centre,Chake chake Pemba,IP/OP
+11,Zanzibar SDA Dispensary,Jang'ombe Unguja,OP
+12,Ihsaan Dispensary,Chake chake Pemba,IP/OP
+13,Zanzibar Medical Group,Stone town Unguja,IP/OP
+14,Mina Hospital,Unguja,IP/OP
+15,Tawakal Hospital,Unguja,IP/OP
+16,Ro+saths Medical Centre,Kilimani Unguja,OP
+17,Mombasa Medical Centre,Mombasa - Zanzibar,OP
+18,Triple J Medical Services Dispensary,Mombasa - Zanzibar,OP
+19,Irfan Dispensary,Kijichi Mnarani- Zanzibar,OP
+SHINYANGA,,,
+1,Marie Stopes Kahama Dispensary,Kahama,OP
+2,Aga Khan Medical Centre,Kahama,OP
+3,Imani Dispensary,Shinyanga Town,OP
+4,Trust God Health Centre,Kakola,OP/IP
+5,Sight Plus Kodak Eyewear,Nyihogo Kahama District - Shinyanga,Optical only
+SINGIDA,,,
+1,Singida Regional Referral Hospital,Singida Town,OP/IP/Denta/Optical
+2,Singida Tumaini Health Centre,,OP/IP
+3,Vision Care Survey Branch,Singida Town,Optical only
+TABORA,,,
+1,Aga Khan Polyclinic,Tabora town,OP
+TARIME/MARA,,,
+1,Marie Stopes Musoma Dispensary,"Kamunyonge, Majita road",OP
+2,Aga Khan Polyclinic,Bunda,OP
+3,Omega Hospital,Musoma,IP/OP
+4,Serengeti Huduma Health Centre,Serengeti-Mugumu,IP/OP
+5,Mugini Polyclinic,"Serengeti St, Tarime- Mara",OP & Observation
+DODOMA,,,
+1,Aga Khan Medical Centre,,OP/IP
+2,DODOMA CHRISTIAN MEDICAL CENTRE,Ntyuka Road,OP/IP
+3,Benjamin Mkapa Hospital,Dodoma town,OP/IP
+4,JMSolomon Dispensary,Nkuhungu,OP
+5,ST. Gianna Polyclinic,Dodoma town,OP
+6,Aluta Clinica Specialized Polyclinic,"Block No. 43, Mlimwa West Area C",OP & Observation
+7,Nakiete Pharmacy,Dodoma town,Pharmacy
+8,Smart Vision Eye Care,Dodoma town,Optical Only
+,,,
+MOROGORO,,,
+1,Aga Khan Medical Centre,Morogoro town,OP
+2,Shalom Medical Centre,Mazimbu,OP/IP
+3,SDA Dispensary,"Misufini, Sultan Area",OP
+4,Dova Eye Care Morogoro Branch,Morogoro town,Optical only
+5,NESSA Health Care,Morogoro- Ifakara,OP/IP
+,,,
+MTWARA,,,
+1,Sajora Health Centre,Mtwara town,OP/IP
+2,Fajma Dispensary,Mtwara town,OP
+3,Bursa Clinic,Mtwara town,OP/IP
+4,Siha Optical and Eye Centre,Mtwara town,Optical
+5,MT. Royal Medical Centre,Mtwara town,OP
+LINDI,,,
+1,Sokoine/Lindi Regional Referral Hospital,Lindi,"IP, OP, Dental, Opt"
+TANGA,,,
+1,Aga Khan Medical Centre,Tanga town,OP
+2,Besha Hospital,Tanga town,OP/IP
+3,Rasheed Dispensary,Tanga town,OP/IP
+4,Safi Medics,Tanga town,OP/IP
+5,Burhani Dispensary,Tanga town,OP
+6,Noor Optics,Tanga town,Optical
+GEITA,,,
+1,Waja Hospital,Geita town,OP/IP/Dental/Optical
+2,Mkulima Dispensary,Chato,OP
+KAGERA,,,
+1,Aga Khan Polyclinic,Bukoba town,OP
+KIBAHA,,,
+1,Kellen Dispensary,Kibaha,OP
+2,Aga Khan Kibaha Health Centre,Kibaha,OP
+SIMIYU,,,
+1,Eden Dispensary,Bariadi,OP
+RUVUMA,,,
+1,Wilolesi Medical Clinic,Songea,OP/IP
+2,St. Joseph Mission Hospital Peramiho,Songea,OP/IP
+SONGWE/TUNDUMA,,,
+1,Dova Eye Care Vwawa Branch,"Mbozi, Songwe",Optical only
+2,Dova Eye Care Tunduma Branch,"Tunduma, Songwe",Optical only
+3,Songwe Regional Referral Hospital,Songwe,IP & OP
+4,Faraja Dispensary,Tunduma,OPD & Observation
+5,,,
+KIGOMA,,,
+1,Mac-ren Medical Clinic,Kigoma Town,Outpatient
+2,Maweni Hospital (Kigoma RRH),Kigoma Town,Outpatient and Inpatient
+3,Upendo dispensary - kasulu,kasulu,outpatient
+4,Upendo Foundation Health Center,"Ujiji Rd, kigoma",Inpatient and Outpatient
+5,Dona Health Centre,Kibondo,Inpatient and Outpatient
+,,,
+,NOTE THAT THE LIST MAY CHANGE FROM TIME TO TIME DUE TO ACCREDITATION PROCESS AND TERMINATION OF PROVIDERS' CONTRACT. FOR FURTHER ASSISTANCE PLEASE CALL OUR MEDICAL HEALP LINE +255 744 123 456 OR +255 767 021 085 .,,
+,BRITAM INSURANCE TANZANIA LTD,,
+,WITH YOU EVERY STEP OF THE WAY,,
