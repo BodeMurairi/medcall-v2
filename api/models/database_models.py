@@ -145,10 +145,13 @@ class ConsultationAnalysis(Base):
     consultation_id = Column(Integer, ForeignKey("consultations.id", ondelete="CASCADE"), nullable=False)
 
     detected_symptoms = Column(TEXT, nullable=False)
+    red_flags = Column(TEXT, nullable=True)       # JSON array
+    key_negatives = Column(TEXT, nullable=True)   # JSON array
     possible_conditions = Column(TEXT, nullable=False)
     exams = Column(TEXT, nullable=False)
 
     risk_level = Column(String, nullable=False)
+    risk_justification = Column(Text, nullable=True)
     mark_emergency = Column(Boolean, default=False)
     reasoning = Column(Text, nullable=True)
 
@@ -186,6 +189,7 @@ class ConsultationDecision(Base):
     urgency = Column(String, nullable=False)
     action = Column(String, nullable=False)
     referral_type = Column(Text, nullable=True)
+    referral_explanation = Column(Text, nullable=True)
     referral_options = Column(Text, nullable=True)  # JSON array of facility objects
 
     created_at = Column(DateTime, default=datetime.utcnow)

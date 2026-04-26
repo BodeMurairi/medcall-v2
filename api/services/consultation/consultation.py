@@ -90,11 +90,14 @@ def trigger_analysis(consultation_id: int, patient_int_id: int, collected_data: 
         analysis_record = ConsultationAnalysis(
             consultation_id=consultation_id,
             detected_symptoms=json.dumps(analysis_json.get("detected_symptoms", [])),
+            red_flags=json.dumps(analysis_json.get("red_flags", [])),
+            key_negatives=json.dumps(analysis_json.get("key_negatives", [])),
             possible_conditions=json.dumps(analysis_json.get("possible_conditions", [])),
             exams=json.dumps(analysis_json.get("exams", {})),
             risk_level=analysis_json.get("risk_level", "low"),
+            risk_justification=analysis_json.get("risk_justification"),
             mark_emergency=analysis_json.get("mark_emergency", False),
-            reasoning=analysis_json.get("reasoning", "")
+            reasoning=json.dumps(analysis_json.get("reasoning")) if isinstance(analysis_json.get("reasoning"), dict) else analysis_json.get("reasoning", "")
         )
         db.add(analysis_record)
         # Also update the consultation's risk_level with the authoritative analysis result
@@ -178,6 +181,7 @@ def trigger_decision(consultation_id: int, patient_int_id: int, analysis_data: d
             urgency=decision_json.get("urgency", "low"),
             action=decision_json.get("action", "self_care"),
             referral_type=decision_json.get("referral_type"),
+            referral_explanation=decision_json.get("referral_explanation"),
             referral_options=referral_options_str,
         )
         db.add(decision_record)

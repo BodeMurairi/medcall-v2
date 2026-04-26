@@ -131,12 +131,14 @@ function StickerPicker({ onSelect, onClose }) {
   useEffect(() => {
     function handleClick(e) {
       if (pickerRef.current && !pickerRef.current.contains(e.target)) {
+        // Don't close if the click was on the toggle button — that button handles its own toggle
+        if (e.target.closest?.('.sticker-toggle-btn')) return
         onClose()
       }
     }
     document.addEventListener('mousedown', handleClick)
     return () => document.removeEventListener('mousedown', handleClick)
-  }, [onClose])
+  }, [onClose])  // onClose is stable via useCallback in parent
 
   return (
     <div className="sticker-picker" ref={pickerRef}>
@@ -205,19 +207,14 @@ function toTime(isoString) {
 
 export default function Chat() {
   const { user } = useAuth()
-  const [messages, setMessages] = useState([
-    {
-      role: 'ai',
-      content: `Hello ${user?.firstName || 'there'}! I'm Doctor Mshauri, your AI health assistant. Please describe your symptoms or health concern and I'll guide you through a consultation.`,
-      time: now(),
-    }
-  ])
+  const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [resumeLoading, setResumeLoading] = useState(true)
   const [isComplete, setIsComplete] = useState(false)
   const [threadId, setThreadId] = useState(() => localStorage.getItem(STORAGE_KEY) || '')
   const [showStickers, setShowStickers] = useState(false)
+  const closeStickers = useCallback(() => setShowStickers(false), [])
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
   const textareaRef = useRef(null)
@@ -331,11 +328,7 @@ export default function Chat() {
     setIsComplete(false)
     setThreadId('')
     localStorage.removeItem(STORAGE_KEY)
-    setMessages([{
-      role: 'ai',
-      content: `Hello ${user?.firstName || 'there'}! I'm Doctor Mshauri. What health concern would you like to discuss today?`,
-      time: now(),
-    }])
+    setMessages([])
   }
 
   return (
@@ -407,43 +400,45 @@ export default function Chat() {
             Consultation ended. Start a new one above.
           </div>
         ) : (
-          <div className="input-row" style={{ position: 'relative' }}>
+          <div className="input-area-inner">
             {showStickers && (
               <StickerPicker
                 onSelect={handleStickerSelect}
-                onClose={() => setShowStickers(false)}
+                onClose={closeStickers}
               />
             )}
-            <button
-              className={`sticker-toggle-btn ${showStickers ? 'sticker-toggle-active' : ''}`}
-              onClick={() => setShowStickers(prev => !prev)}
-              disabled={loading}
-              title="Express how you feel"
-              aria-label="Open sticker picker"
-            >
-              🙂
-            </button>
-            <textarea
-              ref={el => { inputRef.current = el; textareaRef.current = el }}
-              className="chat-input"
-              placeholder="Describe your symptoms…"
-              value={input}
-              onChange={handleInput}
-              onKeyDown={handleKeyDown}
-              rows={1}
-              disabled={loading}
-            />
-            <button
-              className={`send-btn ${(!input.trim() || loading) ? 'send-btn-disabled' : ''}`}
-              onClick={handleSend}
-              disabled={!input.trim() || loading}
-              aria-label="Send message"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="22" y1="2" x2="11" y2="13" />
-                <polygon points="22 2 15 22 11 13 2 9 22 2" />
-              </svg>
-            </button>
+            <div className="input-row">
+              <button
+                className={`sticker-toggle-btn ${showStickers ? 'sticker-toggle-active' : ''}`}
+                onClick={() => setShowStickers(prev => !prev)}
+                disabled={loading}
+                title="Express how you feel"
+                aria-label="Open sticker picker"
+              >
+                🙂
+              </button>
+              <textarea
+                ref={el => { inputRef.current = el; textareaRef.current = el }}
+                className="chat-input"
+                placeholder="Describe your symptoms…"
+                value={input}
+                onChange={handleInput}
+                onKeyDown={handleKeyDown}
+                rows={1}
+                disabled={loading}
+              />
+              <button
+                className={`send-btn ${(!input.trim() || loading) ? 'send-btn-disabled' : ''}`}
+                onClick={handleSend}
+                disabled={!input.trim() || loading}
+                aria-label="Send message"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              </button>
+            </div>
           </div>
         )}
         <p className="input-hint">MedCall AI assists but does not replace professional medical advice.</p>
