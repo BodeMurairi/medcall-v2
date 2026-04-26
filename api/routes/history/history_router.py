@@ -34,6 +34,7 @@ class DecisionItem(BaseModel):
     urgency: str
     action: str
     referral_type: Optional[str]
+    referral_options: Optional[Any]
 
 class ConsultationHistoryItem(BaseModel):
     id: int
@@ -102,7 +103,8 @@ def get_history(
                 message=d.message,
                 urgency=d.urgency,
                 action=d.action,
-                referral_type=d.referral_type
+                referral_type=d.referral_type,
+                referral_options=_safe_json(d.referral_options),
             )
 
         result.append(ConsultationHistoryItem(

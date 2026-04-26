@@ -7,6 +7,7 @@ from langchain.tools import tool
 CLINICS_DIR = os.path.join(os.path.dirname(__file__), "clinics")
 
 COUNTRY_FILES = {
+    "nigeria":     "NigeriaHospitalList.csv",
     "rwanda":      "RwandaHospitalSample.csv",
     "kenya":       "KenyaHospitalSample.csv",
     "uganda":      "UgandaHospitalSamples.csv",
@@ -38,7 +39,7 @@ def load_clinics_by_country(country: str) -> str:
     This tool loads all healthcare facilities, hospitals, clinics, pharmacies, and specialists
     for a given East African or North African country.
     Use this to find referral facilities near the patient's location.
-    Supported countries: Rwanda, Kenya, Uganda, Tanzania, Ethiopia, Egypt, Sudan, South Sudan.
+    Supported countries: Nigeria, Rwanda, Kenya, Uganda, Tanzania, Ethiopia, Egypt, Sudan, South Sudan.
 
     Args:
         country: Name of the country (case-insensitive).
@@ -54,7 +55,7 @@ def load_all_clinics() -> str:
     """
     This tooLoad healthcare facilities for ALL supported countries at once.
     Use this when the patient's country is unknown or when a broad search is needed.
-    Covers: Rwanda, Kenya, Uganda, Tanzania, Ethiopia, Egypt, Sudan, South Sudan.
+    Covers: Nigeria, Rwanda, Kenya, Uganda, Tanzania, Ethiopia, Egypt, Sudan, South Sudan.
 
     Returns:
         Combined healthcare provider data for all countries.

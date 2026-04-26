@@ -120,16 +120,22 @@ function AnalysisPanel({ analysis }) {
           <div className="conditions-list">
             {conditions.map((c, i) => {
               const name = typeof c === 'object' ? c.name || c.condition || JSON.stringify(c) : c
-              const confidence = typeof c === 'object' && c.confidence != null
+              const raw = typeof c === 'object' && c.confidence != null
                 ? Math.round(c.confidence * 100)
+                : null
+              const confidenceRange = raw !== null
+                ? raw >= 75 ? `High (70–90%)`
+                : raw >= 50 ? `Moderate (45–65%)`
+                : raw >= 25 ? `Low (20–35%)`
+                : `Very Low (<20%)`
                 : null
               return (
                 <div key={i} className="condition-item">
                   <span className="condition-name">{name}</span>
-                  {confidence !== null && (
+                  {raw !== null && (
                     <div className="confidence-bar">
-                      <div className="confidence-fill" style={{ width: `${confidence}%` }} />
-                      <span className="confidence-label">{confidence}%</span>
+                      <div className="confidence-fill" style={{ width: `${raw}%` }} />
+                      <span className="confidence-label">{confidenceRange}</span>
                     </div>
                   )}
                 </div>
@@ -205,7 +211,7 @@ function DecisionPanel({ decision }) {
         </div>
       </div>
 
-      {decision.referral_type && (
+      {(decision.referral_type || (decision.referral_options && decision.referral_options.length > 0)) && (
         <div className="referral-box">
           <h4>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -214,7 +220,23 @@ function DecisionPanel({ decision }) {
             </svg>
             Referral Information
           </h4>
-          <p>{decision.referral_type}</p>
+          {decision.referral_type && <p className="referral-summary">{decision.referral_type}</p>}
+          {decision.referral_options && decision.referral_options.length > 0 && (
+            <div className="referral-options">
+              {decision.referral_options.map((opt, i) => (
+                <div key={i} className="referral-option">
+                  <div className="referral-option-header">
+                    <span className="referral-option-name">{opt.name}</span>
+                    {opt.estimated_cost && (
+                      <span className="referral-option-cost">{opt.estimated_cost}</span>
+                    )}
+                  </div>
+                  {opt.address && <p className="referral-option-address">{opt.address}</p>}
+                  {opt.department && <p className="referral-option-dept">{opt.department}</p>}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

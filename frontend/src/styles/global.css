@@ -411,6 +411,22 @@ p { margin: 0; }
   30% { transform: translateY(-6px); }
 }
 
+/* ---------- Resume loading / banner ---------- */
+.resume-loading {
+  display: flex; align-items: center; justify-content: center;
+  gap: 5px; padding: 32px 0;
+}
+.resume-banner {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  margin: 8px 16px 4px;
+  padding: 7px 14px;
+  background: #e8f0fe;
+  border: 1px solid #c5d8fb;
+  border-radius: 20px;
+  font-size: 12px; font-weight: 500; color: #1a73e8;
+}
+
 /* ---------- Consultation complete ---------- */
 .consultation-complete {
   display: flex; flex-direction: column; align-items: center;
@@ -476,6 +492,112 @@ p { margin: 0; }
   transform: scale(1.05);
 }
 .send-btn-disabled { opacity: .4; cursor: not-allowed; }
+
+/* ---------- Sticker toggle button ---------- */
+.sticker-toggle-btn {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--surface-2);
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  line-height: 1;
+}
+.sticker-toggle-btn:hover { background: var(--surface-3, #e8eaed); }
+.sticker-toggle-btn.sticker-toggle-active {
+  background: #e8f0fe;
+  border-color: #1a73e8;
+}
+.sticker-toggle-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ---------- Sticker picker popup ---------- */
+.sticker-picker {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: 280px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.14);
+  z-index: 100;
+  overflow: hidden;
+}
+.sticker-picker-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px 6px;
+  border-bottom: 1px solid var(--border);
+}
+.sticker-picker-title {
+  font-size: 12px; font-weight: 700; color: var(--text-2);
+  text-transform: uppercase; letter-spacing: .5px;
+}
+.sticker-picker-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 13px; color: var(--text-3); padding: 2px 4px;
+  border-radius: 4px;
+}
+.sticker-picker-close:hover { background: var(--surface-2); color: var(--text); }
+
+.sticker-category-tabs {
+  display: flex; gap: 2px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.sticker-tab {
+  flex-shrink: 0;
+  width: 36px; height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background .12s;
+}
+.sticker-tab:hover { background: var(--surface-2); }
+.sticker-tab.sticker-tab-active { background: #e8f0fe; }
+
+.sticker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 8px 10px 10px;
+}
+.sticker-btn {
+  width: 100%; aspect-ratio: 1;
+  border: none; border-radius: 10px;
+  background: none;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .12s, transform .1s;
+  line-height: 1;
+}
+.sticker-btn:hover {
+  background: var(--surface-2);
+  transform: scale(1.18);
+}
+.sticker-btn:active { transform: scale(.95); }
+
+/* ---------- Sticker-only message bubble ---------- */
+/* Only strip the background for AI stickers; user stickers keep their blue bubble */
+.message-ai .bubble-sticker {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 2px 4px !important;
+}
+.message-user .bubble-sticker {
+  padding: 6px 12px !important;
+}
+.sticker-text {
+  font-size: 42px !important;
+  line-height: 1.1;
+}
 
 .input-hint { font-size: 11px; color: var(--text-3); text-align: center; margin-top: 8px; }
 .input-disabled-msg {
@@ -694,6 +816,34 @@ p { margin: 0; }
   margin-bottom: 6px;
 }
 .referral-box p { font-size: 13px; color: var(--text); line-height: 1.6; }
+.referral-summary { margin-bottom: 10px; }
+
+.referral-options { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+
+.referral-option {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  padding: 10px 12px;
+}
+.referral-option-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; margin-bottom: 4px;
+}
+.referral-option-name {
+  font-size: 13px; font-weight: 600; color: var(--text);
+}
+.referral-option-cost {
+  font-size: 11px; font-weight: 600; color: #2e7d32;
+  background: #e8f5e9; padding: 2px 7px; border-radius: 10px;
+  white-space: nowrap;
+}
+.referral-option-address {
+  font-size: 12px; color: var(--text-2); margin: 0 0 2px;
+}
+.referral-option-dept {
+  font-size: 12px; color: #1a73e8; margin: 0; font-style: italic;
+}
 
 /* ---------- Empty panel ---------- */
 .panel-empty {

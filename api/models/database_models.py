@@ -186,6 +186,7 @@ class ConsultationDecision(Base):
     urgency = Column(String, nullable=False)
     action = Column(String, nullable=False)
     referral_type = Column(Text, nullable=True)
+    referral_options = Column(Text, nullable=True)  # JSON array of facility objects
 
     created_at = Column(DateTime, default=datetime.utcnow)
 
