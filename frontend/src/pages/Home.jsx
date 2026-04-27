@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import medcallLogo from '../assets/medcall-logo.svg'
+import medcallIcon from '../assets/medcall-icon.svg'
 
 /* ── Shared small components ─────────────────────────────────────────────── */
 
@@ -9,11 +11,7 @@ function NavBar() {
     <header className="home-nav">
       <div className="home-nav-inner">
         <Link to="/" className="home-nav-logo">
-          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-            <rect width="40" height="40" rx="10" fill="#1a73e8"/>
-            <path d="M20 8v24M8 20h24" stroke="white" strokeWidth="4" strokeLinecap="round"/>
-          </svg>
-          <span>MedCall</span>
+          <img src={medcallLogo} alt="MedCall" className="home-nav-logo-img" />
         </Link>
         <nav className="home-nav-links">
           <a href="#how" className="home-nav-link">How it works</a>
@@ -121,8 +119,8 @@ export default function Home() {
             </a>
           </div>
           <div className="hero-stats">
-            <StatCard value="65%" label="DRC population &gt;5km from a hospital*" />
-            <StatCard value="0.5 / 1,000" label="Doctors per patient in DRC*" />
+            <StatCard value="80%+" label="Lagos residents &gt;5km from care*" />
+            <StatCard value="97.9%" label="Uninsured in urban Lagos*" />
             <StatCard value="USSD + Web" label="Works on any phone" />
             <StatCard value="8 Countries" label="East Africa covered" />
           </div>
@@ -139,23 +137,23 @@ export default function Home() {
             <h2 className="pds-title">Millions across Africa cannot access basic healthcare</h2>
             <p className="pds-lead">
               Across sub-Saharan Africa, rural communities face a healthcare crisis rooted in broken
-              infrastructure, chronic shortages of medical professionals, and geography. The DRC
-              illustrates this reality sharply — but it is far from unique.
+              infrastructure, chronic shortages of medical professionals, and deep inequalities in
+              access. In Lagos, millions face this reality every day — and it repeats across the continent.
             </p>
           </div>
 
           {/* Stat spotlight row */}
           <div className="pds-stats">
             <div className="pds-stat">
-              <span className="pds-stat-num">65%</span>
-              <span className="pds-stat-text">of DRC population lives more than 5 km from a hospital</span>
-              <span className="pds-stat-src">GRID3, 2022</span>
+              <span className="pds-stat-num">80%+</span>
+              <span className="pds-stat-text">of Lagos residents travel 6–10 km to reach the nearest healthcare facility</span>
+              <span className="pds-stat-src">piph.org</span>
             </div>
             <div className="pds-stat-sep" />
             <div className="pds-stat">
-              <span className="pds-stat-num">0.5</span>
-              <span className="pds-stat-text">doctors per 1,000 patients in the DRC — far below minimum need</span>
-              <span className="pds-stat-src">MexicoHistorico.com, 2025</span>
+              <span className="pds-stat-num">97.9%</span>
+              <span className="pds-stat-text">of urban Lagos residents have no health insurance coverage</span>
+              <span className="pds-stat-src">piph.org</span>
             </div>
             <div className="pds-stat-sep" />
             <div className="pds-stat">
@@ -168,8 +166,8 @@ export default function Home() {
           {/* Narrative */}
           <div className="pds-narrative">
             <p>
-              Countries like Nigeria, Ethiopia, Tanzania, and Sudan face similar or worse doctor
-              ratios to the DRC — leaving <strong>hundreds of millions</strong> without timely
+              Countries like Nigeria, Ethiopia, Tanzania, and Sudan face critical shortages of
+              medical professionals — leaving <strong>hundreds of millions</strong> without timely
               access to qualified care.
             </p>
             <p>
@@ -193,12 +191,12 @@ export default function Home() {
               {
                 num: '01', color: '#ef4444',
                 title: 'Inaccessible facilities',
-                desc: 'Up to 65% of DRC residents live over 5 km from the nearest hospital. Long distances and poor roads make in-person care unreachable for millions across rural Africa.',
+                desc: 'Over 80% of Lagos residents travel 6–10 km to reach a healthcare facility. Long distances and inadequate transport make in-person care unreachable for millions.',
               },
               {
                 num: '02', color: '#f59e0b',
                 title: 'Critical doctor shortage',
-                desc: 'With only 0.5 doctors per 1,000 patients in the DRC — and similarly low ratios continent-wide — the healthcare system cannot meet even basic population demand.',
+                desc: 'With 97.9% of Lagos residents uninsured and 46.8% spending over 20% of their income on healthcare, cost remains a decisive barrier to seeking care.',
               },
               {
                 num: '03', color: '#f97316',
@@ -379,10 +377,7 @@ export default function Home() {
         <div className="home-container">
           <div className="footer-inner">
             <div className="footer-brand">
-              <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-                <rect width="40" height="40" rx="10" fill="#1a73e8"/>
-                <path d="M20 8v24M8 20h24" stroke="white" strokeWidth="4" strokeLinecap="round"/>
-              </svg>
+              <img src={medcallIcon} alt="MedCall" className="footer-brand-icon" />
               <span>MedCall</span>
             </div>
             <p className="footer-tagline">AI-powered clinical intelligence for Africa.</p>

@@ -32,3 +32,6 @@ node_modules/
 .env.local
 .env.*.local
 .env.production
+MedCall presentation.pptx
+MedCall presentation.pdf
+SYSTEM_DOCUMENTATION.md
