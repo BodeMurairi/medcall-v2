@@ -26,70 +26,70 @@ decision_llm = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_G"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_8 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_A"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_1 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_X"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_2 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_B"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_3 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_4 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_V"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_5 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_F"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_6 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_D"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_7 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_E"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 decision_llm_fallback_9 = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_AI_MODEL"),
     api_key=os.getenv("GEMINI_API_KEY_H"),
     temperature=0,
-    max_tokens=8000
+    max_tokens=16000
 )
 
 tools = [

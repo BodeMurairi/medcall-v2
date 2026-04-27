@@ -90,11 +90,14 @@ def trigger_analysis(consultation_id: int, patient_int_id: int, collected_data: 
         analysis_record = ConsultationAnalysis(
             consultation_id=consultation_id,
             detected_symptoms=json.dumps(analysis_json.get("detected_symptoms", [])),
+            red_flags=json.dumps(analysis_json.get("red_flags", [])),
+            key_negatives=json.dumps(analysis_json.get("key_negatives", [])),
             possible_conditions=json.dumps(analysis_json.get("possible_conditions", [])),
             exams=json.dumps(analysis_json.get("exams", {})),
             risk_level=analysis_json.get("risk_level", "low"),
+            risk_justification=analysis_json.get("risk_justification"),
             mark_emergency=analysis_json.get("mark_emergency", False),
-            reasoning=analysis_json.get("reasoning", "")
+            reasoning=json.dumps(analysis_json.get("reasoning")) if isinstance(analysis_json.get("reasoning"), dict) else analysis_json.get("reasoning", "")
         )
         db.add(analysis_record)
         # Also update the consultation's risk_level with the authoritative analysis result
@@ -102,6 +105,12 @@ def trigger_analysis(consultation_id: int, patient_int_id: int, collected_data: 
         db.commit()
         print(f"[INFO] Analysis saved for consultation {consultation_id}")
         print(f"[ANALYSIS] risk={analysis_json.get('risk_level')} | emergency={analysis_json.get('mark_emergency')} | conditions={analysis_json.get('possible_conditions')}")
+        # Merge current_location from collected_data into analysis so decision agent can use it
+        current_location = (collected_data or {}).get("current_location")
+        if current_location:
+            analysis_json["collected_data"] = analysis_json.get("collected_data") or {}
+            analysis_json["collected_data"]["current_location"] = current_location
+
         # Chain into decision agent (uses its own session)
         trigger_decision(
             consultation_id=consultation_id,
@@ -127,14 +136,24 @@ def trigger_decision(consultation_id: int, patient_int_id: int, analysis_data: d
             PatientPersonalInfo.patient_id == patient_int_id
         ).first()
 
+        # Prefer current_location captured during consultation over registered address
+        consultation = db.query(Consultation).filter(Consultation.id == consultation_id).first()
+        collected = {}
+        if consultation and consultation.consultation_summary:
+            # collected_data may have been embedded in analysis_data
+            collected = analysis_data.get("collected_data", {}) or {}
+
+        current_loc = collected.get("current_location") or {}
+        patient_location = {
+            "country": current_loc.get("country") or (personal_info.country_of_residence if personal_info else None),
+            "city":    current_loc.get("city")    or (personal_info.city_of_residence    if personal_info else None),
+            "address": current_loc.get("address") or (personal_info.address              if personal_info else None),
+        }
+
         decision_input = {
             "consultation_id": str(consultation_id),
             "analysis": analysis_data,
-            "patient_location": {
-                "country": personal_info.country_of_residence if personal_info else None,
-                "city": personal_info.city_of_residence if personal_info else None,
-                "address": personal_info.address if personal_info else None,
-            }
+            "patient_location": patient_location,
         }
 
         agent_instance, _ = decision_agent(thread_id=f"decision-{consultation_id}")
@@ -152,12 +171,18 @@ def trigger_decision(consultation_id: int, patient_int_id: int, analysis_data: d
             print(f"[WARN] Decision returned empty or invalid JSON for consultation {consultation_id}")
             return
 
+        import json as _json
+        referral_options_raw = decision_json.get("referral_options")
+        referral_options_str = _json.dumps(referral_options_raw) if referral_options_raw else None
+
         decision_record = ConsultationDecision(
             consultation_id=consultation_id,
             message=decision_json.get("message", ""),
             urgency=decision_json.get("urgency", "low"),
             action=decision_json.get("action", "self_care"),
             referral_type=decision_json.get("referral_type"),
+            referral_explanation=decision_json.get("referral_explanation"),
+            referral_options=referral_options_str,
         )
         db.add(decision_record)
         db.commit()
@@ -198,13 +223,35 @@ def handle_consultation(db: Session, phone_number: str, user_input: str, thread_
     # Reuse existing thread_id or use the new one
     current_thread_id = active_consultation.thread_id if active_consultation else thread_id
 
+    # If resuming an existing consultation, pass the full prior conversation as context.
+    # InMemorySaver loses checkpoints on server restart, so we rebuild context from the DB.
+    human_content = f"user question: {user_input}\nuser phone number: {phone_number}"
+    if active_consultation:
+        prior_msgs = (
+            db.query(ConsultationSMS)
+            .filter(ConsultationSMS.consultation_id == active_consultation.id)
+            .order_by(ConsultationSMS.timestamp)
+            .all()
+        )
+        if prior_msgs:
+            history_lines = "\n".join(
+                f"[{'DOCTOR' if m.message_type == 'ai' else 'PATIENT'}]: {m.content}"
+                for m in prior_msgs
+            )
+            human_content = (
+                f"RESUMING CONSULTATION — full history below. "
+                f"Do NOT re-greet, do NOT re-verify, do NOT re-collect info already gathered. "
+                f"Continue exactly from where the conversation left off.\n\n"
+                f"CONVERSATION HISTORY:\n{history_lines}\n\n"
+                f"CURRENT PATIENT MESSAGE: {user_input}\n"
+                f"user phone number: {phone_number}"
+            )
+
     # Send user message to AI agent
     response = agent.invoke(
         {
             "messages": [
-                HumanMessage(
-                    content=f"user question: {user_input}\nuser phone number: {phone_number}"
-                )
+                HumanMessage(content=human_content)
             ]
         },
         config={"configurable": {"thread_id": current_thread_id}},

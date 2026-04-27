@@ -12,6 +12,12 @@ class USSDState(str, Enum):
 
     END = "END"
 
+class PersonalInfoMenu(str, Enum):
+    MENU = "PERSONAL_INFO_MENU"
+
+class MedicalInfoMenu(str, Enum):
+    MENU = "MEDICAL_INFO_MENU"
+
 class USSDPersonalInfo(str, Enum):
 
     MAIN_MENU = "PERSONAL_INFO"
@@ -27,13 +33,12 @@ class USSDPersonalInfo(str, Enum):
     COMPLETE_NEXT_KIN_RELATIONSHIP = "PATIENT_NEXT_KIN_RELATIONSHIP"
     COMPLETE_NEXT_KIN_PHONE_NUMBER = "PATIENT_NEXT_KIN_PHONE_NUMBER"
     COMPLETE_PREFERRED_LANGUAGE = "PATIENT_PREFERRED_LANGUAGE"
-    
+
     END = "END"
 
 class USSDMedicalInfo(str, Enum):
-    """USSD For adding medical info"""
     MAIN_MENU = "MEDICAL_INFO"
-    
+
     VERIFY_PIN = "PIN"
     BLOOD_TYPE = "ADD_BLOOD_TYPE"
     ALLERGIES = "ADD_ALLERGIES"
@@ -44,7 +49,7 @@ class USSDMedicalInfo(str, Enum):
 
 class ViewInfo(str, Enum):
     MAIN_MENU = "VIEW_INFO"
-    
+
     VERIFY_PIN = "PIN"
     MEDICAL_INFO = "MEDICAL_INFO"
 
@@ -54,6 +59,15 @@ class ViewPersonalInfo(str, Enum):
     VERIFY_PIN = "PIN"
     PERSONAL_INFO = "PERSONAL_INFO"
 
+class ConsultationHistory(str, Enum):
+    VERIFY_PIN = "CH_VERIFY_PIN"
+    LIST       = "CH_LIST"
+    DETAIL_MENU = "CH_DETAIL_MENU"
+    SUMMARY    = "CH_SUMMARY"
+    ANALYSIS   = "CH_ANALYSIS"
+    DECISION   = "CH_DECISION"
+
+# kept for backward compatibility — no longer used in engine dispatch
 class ViewConsultation(str, Enum):
-    MAIN_MENU = "CONSULTATION"
+    MAIN_MENU  = "CONSULTATION"
     VERIFY_PIN = "PIN"

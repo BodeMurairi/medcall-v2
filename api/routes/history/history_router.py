@@ -23,9 +23,12 @@ class SMSItem(BaseModel):
 
 class AnalysisItem(BaseModel):
     detected_symptoms: Any
+    red_flags: Optional[Any]
+    key_negatives: Optional[Any]
     possible_conditions: Any
     exams: Any
     risk_level: str
+    risk_justification: Optional[str]
     mark_emergency: bool
     reasoning: Optional[str]
 
@@ -34,6 +37,8 @@ class DecisionItem(BaseModel):
     urgency: str
     action: str
     referral_type: Optional[str]
+    referral_explanation: Optional[str]
+    referral_options: Optional[Any]
 
 class ConsultationHistoryItem(BaseModel):
     id: int
@@ -88,9 +93,12 @@ def get_history(
             a = c.analysis
             analysis = AnalysisItem(
                 detected_symptoms=_safe_json(a.detected_symptoms),
+                red_flags=_safe_json(a.red_flags),
+                key_negatives=_safe_json(a.key_negatives),
                 possible_conditions=_safe_json(a.possible_conditions),
                 exams=_safe_json(a.exams),
                 risk_level=a.risk_level,
+                risk_justification=a.risk_justification,
                 mark_emergency=a.mark_emergency,
                 reasoning=a.reasoning
             )
@@ -102,7 +110,9 @@ def get_history(
                 message=d.message,
                 urgency=d.urgency,
                 action=d.action,
-                referral_type=d.referral_type
+                referral_type=d.referral_type,
+                referral_explanation=d.referral_explanation,
+                referral_options=_safe_json(d.referral_options),
             )
 
         result.append(ConsultationHistoryItem(

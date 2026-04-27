@@ -5,9 +5,9 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from models.database_models import PatientRegistration
 from schemas.users import PatientRegistration as registration_schema
-from database.session import get_db
 from services.ussd.response import con, end
 from services.ussd.state import USSDState
+
 
 def registration_flow(session, user_input, db: Session):
 
@@ -15,61 +15,77 @@ def registration_flow(session, user_input, db: Session):
     state = session["state"]
     phone_number = session["phone"]
 
+    # 0 at any step cancels registration and returns to main menu
+    if user_input == "0":
+        from services.ussd.flows.menu_flow import main_menu
+        # clear any partial registration data
+        for key in ["first_name", "last_name", "email", "pin"]:
+            session.pop(key, None)
+        return main_menu(session)
+
     if state == USSDState.REGISTER_FIRST_NAME:
         session["first_name"] = user_input.upper()
         session["state"] = USSDState.REGISTER_LAST_NAME
-        return con("Enter your last name")
+        return con("Enter your last name\n0. Back")
 
     if state == USSDState.REGISTER_LAST_NAME:
         session["last_name"] = user_input.upper()
         session["state"] = USSDState.REGISTER_EMAIL
-        return con("Enter your email (or 'none')")
+        return con("Enter your email (or type 'none')\n0. Back")
 
     if state == USSDState.REGISTER_EMAIL:
-        session["email"] = user_input.upper() if user_input else None
+        session["email"] = user_input if user_input.lower() != "none" else None
         session["state"] = USSDState.REGISTER_PIN
-        return con("Enter your PIN")
+        return con("Create a PIN\n0. Back")
 
     if state == USSDState.REGISTER_PIN:
         session["pin"] = user_input
         session["state"] = USSDState.REGISTER_CONFIRM_PIN
-        return con("Confirm your PIN")
+        return con("Confirm your PIN\n0. Back")
 
     if state == USSDState.REGISTER_CONFIRM_PIN:
         if user_input != session["pin"]:
-            return end("PIN mismatch. Registration failed.")
+            session["state"] = USSDState.REGISTER_PIN
+            return con("PIN mismatch. Enter your PIN again\n0. Back")
 
-        # Hash the PIN
         hashed_pin = bcrypt.hashpw(session["pin"].encode(), bcrypt.gensalt())
 
-        # Gather all details
         registration_data = {
-            "first_name": session["first_name"].upper(),
-            "last_name": session["last_name"].upper(),
-            "email_address": session["email"],
+            "first_name": session["first_name"],
+            "last_name": session["last_name"],
+            "email_address": session.get("email"),
             "phone_number": phone_number,
-            "pin": hashed_pin.decode()
+            "pin": hashed_pin.decode(),
         }
-        
+
         try:
             patient_data = registration_schema(**registration_data)
-        except Exception as validation_error:
-            print(f"\nfailed to register:\n{validation_error}")
-            end("Registration failed. Invalid input")
+        except Exception:
+            return end("Registration failed. Invalid input. Please redial.")
+
+        existing = db.query(PatientRegistration).where(
+            PatientRegistration.phone_number == phone_number
+        ).first()
+        if existing:
+            return end(
+                "This number is already registered.\n"
+                "Redial and choose Personal or Medical Information."
+            )
+
         try:
-            new_patient = PatientRegistration(**patient_data.model_dump(mode="json"), updated_at=datetime.utcnow())
+            new_patient = PatientRegistration(
+                **patient_data.model_dump(mode="json"),
+                updated_at=datetime.utcnow(),
+            )
             db.add(new_patient)
             db.commit()
             db.refresh(new_patient)
-        except Exception as db_error:
-            print(f"\nValue error:\n {db_error}")
-            print("DEBUG: Registration failed:", db_error)
-            end("Registration failed. Try later")
+        except Exception as e:
+            print(f"Registration DB error: {e}")
+            return end("Registration failed. Please try again later.")
 
         return end(
-            "Registration successful. Welcome to MedCall\nRegistration Details:\n"
-            f"First name: {registration_data['first_name']}\n"
-            f"Last name: {registration_data['last_name']}\n"
-            f"Email address: {registration_data['email_address']}\n"
-            f"Phone Number: {registration_data['phone_number']}"
+            f"Welcome to MedCall, {registration_data['first_name']}!\n"
+            "Registration successful.\n"
+            "Redial to complete your profile."
         )

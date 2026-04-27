@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
+import medcallIcon from '../assets/medcall-icon.svg'
+import medcallLogo from '../assets/medcall-logo.svg'
 import { useAuth } from '../context/AuthContext'
 import { useToast } from '../context/ToastContext'
 import ChangePasswordModal from './ChangePasswordModal'
@@ -69,13 +71,7 @@ export default function Layout() {
       {/* ── Sidebar (desktop) ── */}
       <aside className="sidebar">
         <div className="sidebar-logo">
-          <div className="logo-icon">
-            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
-              <rect width="40" height="40" rx="10" fill="#1a73e8"/>
-              <path d="M20 8v24M8 20h24" stroke="white" strokeWidth="4" strokeLinecap="round"/>
-            </svg>
-          </div>
-          <span className="sidebar-brand">MedCall</span>
+          <img src={medcallLogo} alt="MedCall" className="sidebar-logo-img" />
         </div>
 
         <nav className="sidebar-nav">

@@ -2,6 +2,18 @@ import { useState, useEffect } from 'react'
 import { apiGet } from '../api/client'
 import { useAuth } from '../context/AuthContext'
 
+function tagIcon(tag) {
+  const icons = {
+    'closest option':      '📍',
+    'most affordable':     '💰',
+    'best match':          '⭐',
+    'balanced choice':     '⚖️',
+    'emergency ready':     '🚨',
+    'specialist available':'🩺',
+  }
+  return icons[(tag || '').toLowerCase()] || '🏥'
+}
+
 function RiskBadge({ level }) {
   const map = {
     high: { label: 'High Risk', cls: 'badge-danger' },
@@ -59,6 +71,8 @@ function MessageThread({ messages }) {
 }
 
 function AnalysisPanel({ analysis }) {
+  const [detailed, setDetailed] = useState(false)
+
   if (!analysis) return (
     <div className="panel-empty">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
@@ -84,15 +98,74 @@ function AnalysisPanel({ analysis }) {
     ? Object.entries(analysis.exams)
     : []
 
+  const redFlags = Array.isArray(analysis.red_flags)
+    ? analysis.red_flags.filter(f => !f.toLowerCase().startsWith('none'))
+    : []
+  const keyNegatives = Array.isArray(analysis.key_negatives) ? analysis.key_negatives : []
+
+  // Parse reasoning — supports both old flat string and new {clinical_interpretation, why_not_emergency} object
+  const reasoningRaw = analysis.reasoning
+  const reasoning = (() => {
+    if (!reasoningRaw) return null
+    if (typeof reasoningRaw === 'object') return reasoningRaw
+    try {
+      const parsed = JSON.parse(reasoningRaw)
+      if (parsed && typeof parsed === 'object') return parsed
+    } catch { /* fallback */ }
+    return { clinical_interpretation: reasoningRaw }
+  })()
+
+  const probColor = (p) => {
+    const level = (p || '').toLowerCase()
+    if (level === 'high') return 'prob-high'
+    if (level === 'moderate') return 'prob-moderate'
+    return 'prob-low'
+  }
+
   return (
     <div className="analysis-panel">
       <div className="analysis-header">
-        <RiskBadge level={analysis.risk_level} />
-        {analysis.mark_emergency && (
-          <span className="badge badge-danger">⚠ Emergency Flag</span>
-        )}
+        <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',flex:1}}>
+          <RiskBadge level={analysis.risk_level} />
+          {analysis.mark_emergency && (
+            <span className="badge badge-danger">🚨 Emergency Flag</span>
+          )}
+        </div>
+        <button
+          className={`view-toggle-btn ${detailed ? 'view-toggle-active' : ''}`}
+          onClick={() => setDetailed(d => !d)}
+        >
+          {detailed ? 'Simple view' : 'Clinical detail'}
+        </button>
       </div>
 
+      {/* Risk justification — always visible */}
+      {analysis.risk_justification && (
+        <div className="risk-justification-box">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{flexShrink:0,marginTop:2}}>
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <p>{analysis.risk_justification}</p>
+        </div>
+      )}
+
+      {/* Red flags — always visible when present */}
+      {redFlags.length > 0 && (
+        <div className="analysis-section red-flags-section">
+          <h4 className="analysis-section-title red-flags-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            Escalation Triggers
+          </h4>
+          <div className="tag-list">
+            {redFlags.map((f, i) => <span key={i} className="tag tag-redflag">{f}</span>)}
+          </div>
+        </div>
+      )}
+
+      {/* Symptoms — always visible */}
       {symptoms.length > 0 && (
         <div className="analysis-section">
           <h4 className="analysis-section-title">
@@ -102,13 +175,12 @@ function AnalysisPanel({ analysis }) {
             Detected Symptoms
           </h4>
           <div className="tag-list">
-            {symptoms.map((s, i) => (
-              <span key={i} className="tag">{s}</span>
-            ))}
+            {symptoms.map((s, i) => <span key={i} className="tag">{s}</span>)}
           </div>
         </div>
       )}
 
+      {/* Conditions — simple: name + badge only; detailed: full card */}
       {conditions.length > 0 && (
         <div className="analysis-section">
           <h4 className="analysis-section-title">
@@ -120,18 +192,31 @@ function AnalysisPanel({ analysis }) {
           <div className="conditions-list">
             {conditions.map((c, i) => {
               const name = typeof c === 'object' ? c.name || c.condition || JSON.stringify(c) : c
-              const confidence = typeof c === 'object' && c.confidence != null
-                ? Math.round(c.confidence * 100)
-                : null
+              const probRaw = typeof c === 'object' ? (c.probability || null) : null
+              const confRaw = typeof c === 'object' && c.confidence != null ? Math.round(c.confidence * 100) : null
+              const probLabel = probRaw
+                ? probRaw.charAt(0).toUpperCase() + probRaw.slice(1).toLowerCase()
+                : confRaw !== null ? (confRaw >= 75 ? 'High' : confRaw >= 50 ? 'Moderate' : 'Low') : null
+              const barWidth = probRaw
+                ? probRaw.toLowerCase() === 'high' ? 80 : probRaw.toLowerCase() === 'moderate' ? 50 : 25
+                : confRaw
               return (
-                <div key={i} className="condition-item">
-                  <span className="condition-name">{name}</span>
-                  {confidence !== null && (
+                <div key={i} className={`condition-item ${detailed ? 'condition-card' : 'condition-card-simple'}`}>
+                  <div className="condition-card-header">
+                    <span className="condition-name">{name}</span>
+                    {probLabel && <span className={`prob-badge ${probColor(probLabel)}`}>{probLabel}</span>}
+                  </div>
+                  {barWidth !== null && (
                     <div className="confidence-bar">
-                      <div className="confidence-fill" style={{ width: `${confidence}%` }} />
-                      <span className="confidence-label">{confidence}%</span>
+                      <div className="confidence-fill" style={{ width: `${barWidth}%` }} />
                     </div>
                   )}
+                  {detailed && <>
+                    {c.included_because && <p className="condition-meta condition-included"><strong>Supports:</strong> {c.included_because}</p>}
+                    {c.less_likely_because && <p className="condition-meta condition-excluded"><strong>Against:</strong> {c.less_likely_because}</p>}
+                    {c.concerns && <p className="condition-meta condition-concern"><strong>Watch for:</strong> {c.concerns}</p>}
+                    {c.safety_note && <p className="condition-meta condition-safety-note"><strong>Why unlikely:</strong> {c.safety_note}</p>}
+                  </>}
                 </div>
               )
             })}
@@ -139,6 +224,7 @@ function AnalysisPanel({ analysis }) {
         </div>
       )}
 
+      {/* Exams — simple: primary care only; detailed: all tiers */}
       {exams.length > 0 && (
         <div className="analysis-section">
           <h4 className="analysis-section-title">
@@ -147,28 +233,82 @@ function AnalysisPanel({ analysis }) {
             </svg>
             Recommended Exams
           </h4>
-          <ul className="exam-list">
-            {exams.map(([cond, examList], i) => (
-              <li key={i}>
-                <strong>{cond}:</strong>{' '}
-                {Array.isArray(examList) ? examList.join(', ') : examList}
-              </li>
+          <div className="tiered-exams">
+            {exams.map(([cond, tiers], i) => (
+              <div key={i} className="exam-condition-block">
+                <p className="exam-condition-name">{cond}</p>
+                {typeof tiers === 'object' && !Array.isArray(tiers) ? (
+                  <>
+                    {tiers.primary_care?.length > 0 && (
+                      <div className="exam-tier">
+                        <span className="exam-tier-label tier-primary">Primary Care</span>
+                        <span className="exam-tier-items">{tiers.primary_care.join(' · ')}</span>
+                      </div>
+                    )}
+                    {detailed && tiers.specialist_referral?.length > 0 && (
+                      <div className="exam-tier">
+                        <span className="exam-tier-label tier-specialist">Specialist</span>
+                        <span className="exam-tier-items">{tiers.specialist_referral.join(' · ')}</span>
+                      </div>
+                    )}
+                    {detailed && tiers.advanced?.length > 0 && (
+                      <div className="exam-tier">
+                        <span className="exam-tier-label tier-advanced">Advanced</span>
+                        <span className="exam-tier-items">{tiers.advanced.join(' · ')}</span>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="exam-tier">
+                    <span className="exam-tier-label tier-primary">Recommended</span>
+                    <span className="exam-tier-items">{Array.isArray(tiers) ? tiers.join(' · ') : String(tiers)}</span>
+                  </div>
+                )}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
-      {analysis.reasoning && (
-        <div className="analysis-section">
-          <h4 className="analysis-section-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
-            AI Reasoning
-          </h4>
-          <p className="reasoning-text">{analysis.reasoning}</p>
-        </div>
-      )}
+      {/* Key negatives + reasoning — clinical detail only */}
+      {detailed && <>
+        {keyNegatives.length > 0 && (
+          <div className="analysis-section">
+            <h4 className="analysis-section-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" />
+              </svg>
+              Key Negative Findings
+            </h4>
+            <div className="tag-list">
+              {keyNegatives.map((n, i) => <span key={i} className="tag tag-negative">{n}</span>)}
+            </div>
+          </div>
+        )}
+
+        {reasoning && (
+          <div className="analysis-section">
+            <h4 className="analysis-section-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              Clinical Reasoning
+            </h4>
+            {reasoning.clinical_interpretation && (
+              <div className="reasoning-block">
+                <p className="reasoning-section-label">Clinical Interpretation</p>
+                <p className="reasoning-text">{reasoning.clinical_interpretation}</p>
+              </div>
+            )}
+            {reasoning.why_not_emergency && (
+              <div className="reasoning-block reasoning-block-safe">
+                <p className="reasoning-section-label">Why Not Emergency</p>
+                <p className="reasoning-text">{reasoning.why_not_emergency}</p>
+              </div>
+            )}
+          </div>
+        )}
+      </>}
     </div>
   )
 }
@@ -205,7 +345,7 @@ function DecisionPanel({ decision }) {
         </div>
       </div>
 
-      {decision.referral_type && (
+      {(decision.referral_type || (decision.referral_options && decision.referral_options.length > 0)) && (
         <div className="referral-box">
           <h4>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -214,7 +354,41 @@ function DecisionPanel({ decision }) {
             </svg>
             Referral Information
           </h4>
-          <p>{decision.referral_type}</p>
+          {decision.referral_explanation && (
+            <div className="referral-explanation">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              {decision.referral_explanation}
+            </div>
+          )}
+          {decision.referral_type && <p className="referral-summary">{decision.referral_type}</p>}
+          {decision.referral_options && decision.referral_options.length > 0 && (
+            <div className="referral-options">
+              {decision.referral_options.map((opt, i) => (
+                <div key={i} className="referral-option">
+                  {opt.tag && (
+                    <div className="referral-tag-row">
+                      <span className={`referral-tag referral-tag-${(opt.tag || '').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z-]/g, '')}`}>
+                        {tagIcon(opt.tag)} {opt.tag}
+                      </span>
+                    </div>
+                  )}
+                  <div className="referral-option-header">
+                    <span className="referral-option-name">{opt.name}</span>
+                    {opt.estimated_cost && (
+                      <span className="referral-option-cost">{opt.estimated_cost}</span>
+                    )}
+                  </div>
+                  {opt.address && <p className="referral-option-address">{opt.address}</p>}
+                  {opt.department && <p className="referral-option-dept">{opt.department}</p>}
+                  {opt.tag_detail && <p className="referral-tag-detail">{opt.tag_detail}</p>}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
