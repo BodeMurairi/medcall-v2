@@ -22,6 +22,11 @@ def normalize_phone_number(phone_number: str, default_region: str = "RW") -> str
     if not phone_number:
         raise ValueError("Phone number is required")
 
+    # Guard against form-encoded '+' arriving as a leading space
+    phone_number = phone_number.strip()
+    if not phone_number.startswith("+") and not phone_number.startswith("0"):
+        phone_number = "+" + phone_number
+
     try:
         parsed_number = phonenumbers.parse(phone_number, default_region)
 
