@@ -184,7 +184,7 @@ function ConsultationComplete({ onNewConsultation }) {
         </svg>
       </div>
       <h3>Consultation Complete</h3>
-      <p>Your symptoms have been recorded and our AI is preparing your health analysis and recommendations. Check your <strong>History</strong> tab soon for the full report.</p>
+      <p>Your symptoms have been recorded and our team at MedCall is preparing your health analysis and recommendations. Check your <strong>History</strong> tab soon for the full report.</p>
       <button className="btn btn-primary" onClick={onNewConsultation}>
         Start New Consultation
       </button>
